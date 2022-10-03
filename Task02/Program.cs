@@ -10,8 +10,8 @@ int number1 = Convert.ToInt32(Console.ReadLine());
 Console.WriteLine("Введите второе число:");
 int number2 = Convert.ToInt32(Console.ReadLine());
 
-bool First = number1 > number2;
-bool Second = number1 < number2;
+bool first = number1 > number2;
+bool second = number1 < number2;
 
 if (number1 > number2)
 {
