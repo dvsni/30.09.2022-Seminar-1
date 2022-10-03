@@ -16,8 +16,12 @@ Console.WriteLine($"Квадрат числа {number} = {square}");
 double d = 4.556;
 string str = "Привет";
 bool b = false;
-
 int number = default (ноль);
+
+if (square == number * number)
+{
+
+}    
 
 
 // int - 2 147 483 648 до 2 147 483 647
