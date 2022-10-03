@@ -9,11 +9,11 @@ int number1 = Convert.ToInt32(Console.ReadLine());
 
 if (number1 % 2 == 0)
 {
-    Console.WriteLine("Четное");
+    Console.WriteLine("Да");
 }
 else
 {
-    Console.WriteLine("Нечетное");
+    Console.WriteLine("Нет");
 }
 
 
