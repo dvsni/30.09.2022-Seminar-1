@@ -23,7 +23,7 @@ int MaxDigit (int number)
     int secondDigit = number % 10; //78 % 10 = 8
     // if(firstDigit > secondDigit) return firstDigit;
     // return secondDigit;
-    int result = default;
+    // int result = default;
     // if(firstDigit > secondDigit) result = firstDigit;
     // else result = secondDigit;
 
