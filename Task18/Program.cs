@@ -5,16 +5,16 @@
 // int number = Convert.ToInt32(Console.ReadLine());
 
 Console.WriteLine("Введите номер четверти: ");
-string number = Console.ReadLine();
+int number = Convert.ToInt32(Console.ReadLine());
 
 string result = Range(number);
 Console.WriteLine(result);
 
-string Range(string number)
+string Range(int number)
 {
-    if (number == "1") return "x > 0 и y > 0";
-    if (number == "2") return "x < 0 и y > 0";
-    if (number == "3") return "x < 0 и y < 0";
-    if (number == "4") return "x > 0 и y < 0";
+    if (number == 1) return "x > 0 и y > 0";
+    if (number == 2) return "x < 0 и y > 0";
+    if (number == 3) return "x < 0 и y < 0";
+    if (number == 4) return "x > 0 и y < 0";
     return "Ошибка ввода";
 }
