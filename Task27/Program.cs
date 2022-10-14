@@ -5,19 +5,21 @@
 // 82 -> 10
 // 9012 -> 12
 
-
 Console.WriteLine("Введите число: ");
 int number = Convert.ToInt32(Console.ReadLine());
-int sumdigits = default;
-int size = default(ConsoleReadLine());
-int i = 1;
-int divide = 1;
-int lastDigit=0;
-while (number > 0)
+int SumNumber(int number)
 {
-    lastDigit = number%10;
-    sumdigits+=lastDigit;
-    i++;
-    number=number/10;
+    int count = Convert.ToString(number).Length;
+    int a = 0;
+    int result = 0;
+
+    for (int i = 0; i <= count; i++)
+    {
+        a = number - number % 10;
+        result = result + (number - a);
+        number = number / 10;
+    }
+    return result;
 }
-Console.WriteLine($"Сумма цифр -> {sumdigits} ");
+int sumNumber = SumNumber(number);
+Console.WriteLine($"Сумма цифр -> {sumNumber} ");
