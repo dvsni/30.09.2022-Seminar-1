@@ -7,7 +7,7 @@
 Console.WriteLine("Введите число: ");
 int num = Convert.ToInt32(Console.ReadLine());
 
-int[] Fib(int number)
+int[] Fibonacci(int number)
 {
     int[] array = new int[number];
     array[0] = 0;
@@ -30,5 +30,5 @@ void PrintArray (int[] array)
     Console.WriteLine("]");
 }
 
-int[] arr = Fib(num);
+int[] arr = Fibonacci(num);
 PrintArray(arr);
