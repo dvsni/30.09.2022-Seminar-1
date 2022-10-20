@@ -8,8 +8,6 @@ Console.WriteLine("Введите длину массива:  ");
 int size = Convert.ToInt32(Console.ReadLine());
 int[] number = new int[size];
 RandomNumber(number);
-Console.WriteLine("В данном массиве: ");
-PrintArray(number);
 
 void RandomNumber(int[] number)
 {
@@ -27,15 +25,17 @@ for (int s = 0; s < number.Length; s++)
 }
 Console.WriteLine($"из {number.Length} показанных чисел, {count} четных");
 
-void PrintArray(int[] number)
+void PrintArray (int[] array)
 {
     Console.Write("[");
-    for (int i = 0; i < number.Length; i++)
+    for (int i = 0; i < array.Length; i++)
     {
-        Console.Write($"{number[i]},");
+        if(i < array.Length - 1) Console.Write($"{array[i]}, ");
+        else Console.Write($"{array[i]}");
     }
-    Console.Write("]");
-    Console.WriteLine();
+    Console.WriteLine("]");
 }
 
+Console.WriteLine("В данном массиве: ");
+PrintArray(number);
 
