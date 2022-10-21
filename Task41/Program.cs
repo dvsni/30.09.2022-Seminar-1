@@ -3,64 +3,44 @@
 // 0, 7, 8, -2, -2 -> 2
 // -1, -7, 567, 89, 223-> 3
 
-int[] StringNumbers(string input)
+void FillArrayManually(int[] arr, int size)
 {
-    int count = 1;
-    for (int i = 0; i < input.Length; i++)
+    for (int i = 0; i < size; i++)
     {
-        if(input[i] == ',')
+        System.Console.WriteLine($"Введи число №{i + 1}");
+        arr[i] = Convert.ToInt32(System.Console.ReadLine());
+    }
+}
+
+int CheckPositiveNumbers(int[] arr)
+{
+    int count = 0;
+    for (int i = 0; i < arr.Length; i++)
+    {
+        if (arr[i] > 0)
         {
             count++;
         }
     }
-
-int[] numbers = new int[count];
-int index = 0;
-for (int i = 0; i < input.Length; i++)
-{
-    string temp = "";
-    while (input[i] != ',')
-    {
-        if(i != input.Length - 1)
-        {
-            temp += input[i].ToString();
-            i++;
-        }
-        else
-        {
-            temp += input[i].ToString();
-            break;
-        }
-    }
-    numbers[index] = Convert.ToInt32(temp);
-        index++;
-    }
-    return numbers;
+    return count;
 }
 
-Console.WriteLine("Введите M числа: ");
-int[] numbers = StringNumbers(Console.ReadLine()!);
-
-int sum = 0;
-for (int i = 0; i < numbers.Length; i++)
+void PrintArray(int[] array)
 {
-    if(numbers[i] > 0)
+    int size = array.Length;
+    Console.Write($"[{array[0]}");
+    for (int i = 0; i < size; i++)
     {
-        sum++;
+        Console.Write($", {array[i]}");
     }
-}
-Console.WriteLine();
-Console.WriteLine($"Количество чисел больше нуля -> {sum}");
-
-void PrintArray (int[] array)
-{
-    Console.Write("[");
-    for (int i = 0; i < array.Length; i++)
-    {
-        if(i < array.Length - 1) Console.Write($"{array[i]}, ");
-        else Console.Write($"{array[i]}");
-    }
-    Console.WriteLine("]");
+    Console.WriteLine($"]");
 }
 
-PrintArray(numbers);
+System.Console.WriteLine("Количество цифр, которые вы хотите ввести: ");
+int number = Convert.ToInt32(System.Console.ReadLine());
+int[] array = new int[number];
+FillArrayManually(array, number);
+System.Console.WriteLine("Введённые числа в виде массива ->");
+PrintArray(array);
+int positivecount = CheckPositiveNumbers(array);
+System.Console.WriteLine($"Вы ввели {positivecount} числа больше нуля.");
