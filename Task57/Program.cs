@@ -56,10 +56,29 @@ void PrintArray(int[] arr)
     }
 }
 
+void CountElements(int[] array)
+{
+    int num = array[0];
+    int count = 1;
+    for (int i = 0; i < array.Length; i++)
+    {
+        if (array[i] == num) count++;
+        else
+        {
+            Console.WriteLine($"{array[i]} встречается {count} раз");
+            num = array[i];
+            count = 1;
+        }
+    }
+    Console.WriteLine($"{num} встречается {count} раз");
+}
+
 int[,] array2D = CreateAMatrixRndInt(4, 4, 1, 10);
 PrintMatrix(array2D);
 Console.WriteLine("");
 int[] array = NewArray(array2D);
 Array.Sort(array);
 PrintArray(array);
+Console.WriteLine("");
+CountElements(array);
 
