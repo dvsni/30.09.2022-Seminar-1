@@ -10,58 +10,57 @@
 
 
 Console.Write("Введите количество строк массива: ");
-int k = Convert.ToInt32(Console.ReadLine());
+int lines = Convert.ToInt32(Console.ReadLine());
 Console.Write("Введите количество столбцов массива: ");
-int m = Convert.ToInt32(Console.ReadLine());
-int[,] array = new int[k, m];
-FillRndMatrix2D(array, 1, 10);
-PrintArrayTwo(array);
-SortRowsArr(array);
-Console.WriteLine("Отсортировали содержимое строк по убыванию->");
-PrintArrayTwo(array);
+int columns = Convert.ToInt32(Console.ReadLine());
 
-void FillRndMatrix2D(int[,] arr, int mins, int maxs)
-{
-    Random rnd = new Random();
-    for (int i = 0; i < arr.GetLength(0); i++)
-    {
-        for (int j = 0; j < arr.GetLength(1); j++)
-        {
-            arr[i, j] = rnd.Next(mins, maxs + 1);
-        }
-    }
-}
+int[,] numbers = new int[lines, columns];
+FillArrayRandomNumbers(numbers);
+Console.WriteLine();
+Console.WriteLine("Массив до изменения");
+PrintArray(numbers);
 
-void PrintArrayTwo(int[,] arr)
+for (int i = 0; i < numbers.GetLength(0); i++)
 {
-    for (int i = 0; i < arr.GetLength(0); i++)
+    for (int j = 0; j < numbers.GetLength(1); j++)
     {
-        Console.Write("|");
-        for (int j = 0; j < arr.GetLength(1); j++)
+        for (int z = 0; z < numbers.GetLength(1); z++)
         {
-            if (j < arr.GetLength(1) - 1) Console.Write($"{arr[i, j],4}, ");
-            else Console.Write($"{arr[i, j],4} ");
-        }
-        Console.WriteLine("|");
-    }
-}
-
-void SortRowsArr(int[,] arr)
-{
-    int temp = arr[0, 0];
-    for (int i = 0; i < arr.GetLength(0); i++)
-    {
-        for (int j = 0; j < arr.GetLength(1) - 1; j++)
-        {
-            for (int k = 0; k < arr.GetLength(1) - 1; k++)
+            if(numbers[i, z] < numbers[i, z + 1])
             {
-                if (arr[i, k] < arr[i, k + 1])
-                {
-                    temp = arr[i, k];
-                    arr[i, k] = arr[i, k + 1];
-                    arr[i, k + 1] = temp;
-                }
+                int temp = 0;
+                temp = numbers[i, z];
+                numbers[i, z] = numbers[i, z + 1];
+                numbers[i, z + 1] = temp;
             }
         }
+    }
+}
+Console.WriteLine();
+Console.WriteLine("Массив со значениями");
+PrintArray(numbers);
+
+void FillArrayRandomNumbers(int[,] array)
+{
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            array[i, j] = new Random().Next(0, 10);
+        }
+    }
+}
+
+void PrintArray(int[,] array)
+{
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        Console.Write("[ ");
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            Console.Write(array[i, j] + " ");
+        }
+        Console.Write("]");
+        Console.WriteLine("");
     }
 }
