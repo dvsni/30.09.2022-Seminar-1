@@ -7,81 +7,62 @@
 // 18 20
 // 15 18
 
-Console.Write("Введите количество строк матрицы А: ");
-int arow = Convert.ToInt32(Console.ReadLine());
-Console.Write("Введите количество столбцов матрицы А: ");
-int acol = Convert.ToInt32(Console.ReadLine());
-Console.Write("Введите количество строк матрицы B: ");
-int brow = Convert.ToInt32(Console.ReadLine());
-Console.Write("Введите количество столбцов матрицы B: ");
-int bcol = Convert.ToInt32(Console.ReadLine());
-if (acol!=brow)
-{
-    Console.Write("Матрицы несогласованы по размерности.");
-}
-else
-{
-    int[,] arrayA = new int[arow, acol];
-    int[,] arrayB = new int[brow, bcol];
-    FillRndMatrix2D(arrayA, 1, 2);
-    FillRndMatrix2D(arrayB, 1, 2);
+int lines = ReadInt("Введите количество строк: ");
+int columns = ReadInt("Введите количество столбцов: ");
+int[,] array = new int[lines, columns];
+int[,] secondArray = new int[lines, columns];
+int[,] resultArray = new int[lines, columns];
 
-    Console.WriteLine("Матрица А: ");
-    PrintArrayTwo(arrayA);
-    Console.WriteLine("Матрица В: ");
-    PrintArrayTwo(arrayB);
-    int[,] multiMatrix = new int[acol, brow];
-    multiMatrix=MultiplyVectorsInt(arrayA,arrayB);
-    Console.WriteLine("Матрица после умножения: ");
-    PrintArrayTwo(multiMatrix);
-}
+FillArrayRandom(array);
+PrintArray2D(array);
+Console.WriteLine();
+FillArrayRandom(secondArray);
+PrintArray2D(secondArray);
+Console.WriteLine();
 
-int[,] MultiplyVectorsInt(int[,] arrA, int[,] arrB)
+if (array.GetLength(0) != secondArray.GetLength(1))
 {
-    int[,] multiMatrix= new int [arrA.GetLength(0),arrB.GetLength(1)];
-    
-    for (int i = 0; i < arrA.GetLength(0); i++)
+    Console.WriteLine("Нельзя перемножить ");
+    return;
+}
+for (int i = 0; i < array.GetLength(0); i++)
+{
+    for (int j = 0; j < secondArray.GetLength(1); j++)
     {
-        for (int j = 0; j < arrB.GetLength(1); j++)
+        resultArray[i, j] = 0;
+        for (int k = 0; k < array.GetLength(1); k++)
         {
-            multiMatrix[i,j] = Scalar(i,j,arrA,arrB);
-        }
-    }
-return multiMatrix;
-}
-
-int Scalar (int ii,int jj, int [,] arrA,int [,] arrB)
-{
-int scal = default;
-    for (int j = 0; j < arrB.GetLength(0); j++)
-    { 
-        scal+=arrA[ii,j]*arrB[j,jj];
-    }
-return scal;
-}
-
-void FillRndMatrix2D(int[,] arr, int mins, int maxs)
-{
-    Random rnd = new Random();
-    for (int i = 0; i < arr.GetLength(0); i++)
-    {
-        for (int j = 0; j < arr.GetLength(1); j++)
-        {
-            arr[i, j] = rnd.Next(mins, maxs + 1);
+            resultArray[i, j] += array[i, k] *  secondArray[k, j];
         }
     }
 }
 
-void PrintArrayTwo(int[,] arr)
+PrintArray2D(resultArray);
+
+int ReadInt(string message)
 {
-    for (int i = 0; i < arr.GetLength(0); i++)
+    Console.Write(message);
+    return Convert.ToInt32(Console.ReadLine());
+}
+
+void FillArrayRandom(int[,] array)
+{
+    for (int i = 0; i < array.GetLength(0); i++)
     {
-        Console.Write("|");
-        for (int j = 0; j < arr.GetLength(1); j++)
+        for (int j = 0; j < array.GetLength(1); j++)
         {
-            if (j < arr.GetLength(1) - 1) Console.Write($"{arr[i, j],4}, ");
-            else Console.Write($"{arr[i, j],4} ");
+            array[i, j] = new Random().Next(0, 10);
         }
-        Console.WriteLine("|");
+    }
+}
+void PrintArray2D(int[,] array)
+{
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            Console.Write($"{array[i, j]}");
+        }
+        Console.WriteLine();
     }
 }
