@@ -5,69 +5,38 @@
 // 11 16 15 06
 // 10 09 08 07
 
-Console.Write("Введите количество строк массива: ");
-int rows = Convert.ToInt32(Console.ReadLine());
-Console.Write("Введите количество столбцов массива: ");
-int columns = Convert.ToInt32(Console.ReadLine());
-Console.Write("Введите с какого числа начать заполнение массива: ");
-int startValue = Convert.ToInt32(Console.ReadLine());
-int[,] array = new int[rows, columns];
-FillSpirally(array, startValue);
-Console.WriteLine("Спирально заполненный массив: ");
-PrintArrayTwo(array);
+Console.WriteLine("Введите размерность массива");
+int size = Convert.ToInt32(Console.ReadLine());
 
-void FillSpirally(int[,] arr, int firstVal)
+int[,] nums = new int[size, size];
+
+int num = 1;
+int i = 0;
+int j = 0;
+
+while(num <= size * size)
 {
-    int totalDigits = arr.GetLength(0) * arr.GetLength(1);
-    int i = 0;
-    int j = 0;
-    int k =1;
-    arr[i, j] = firstVal;
-    int prevValue = default;
-    while (k< totalDigits)
-    {
-        prevValue = arr[i, j];
-        if (((j + 1 < arr.GetLength(1))&&(arr[i, j + 1] == 0))&&((i==0)||(arr[i-1,j]!=0)))
-        {
-            j++;
-        }
-        else
-        {
-            if ((i + 1 < arr.GetLength(0))&&(arr[i + 1, j] == 0) )
-            {
-                i++;
-            }
-            else
-            {
-                if ((j - 1 >= 0)&&(arr[i, j - 1] == 0) )
-                {
-                    j--;
-                }
-                else
-                {
-                    if ((i - 1 >= 0)&&(arr[i - 1, j] == 0))
-                    {
-                        i--;
-                    }
-                   
-                }
-            }
-        }
-         arr[i, j] = prevValue + 1;
-         k++;
-    }
+    nums[i, j] = num;
+    if(i <= j + 1 && i + j < size - 1) ++j;
+    else if(i < j && i + j >= size - 1) ++i;
+    else if(i >= j && i + j > size - 1) --j;
+    else
+    --i;
+    ++num;
 }
 
-void PrintArrayTwo(int[,] arr)
+PrintArray(nums);
+
+void PrintArray(int[,] array)
 {
-    for (int i = 0; i < arr.GetLength(0); i++)
+    for (int i = 0; i < array.GetLength(0); i++)
     {
-        Console.Write("|");
-        for (int j = 0; j < arr.GetLength(1); j++)
+        Console.Write("[");
+        for (int j = 0; j < array.GetLength(1); j++)
         {
-            if (j < arr.GetLength(1) - 1) Console.Write($"{arr[i, j],4}, ");
-            else Console.Write($"{arr[i, j],4} ");
+            Console.Write(array[i, j] + " ");
         }
-        Console.WriteLine("|");
+        Console.Write("]");
+        Console.WriteLine("");
     }
 }
